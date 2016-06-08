@@ -28,8 +28,8 @@ public:
 		int t = 63 - __builtin_clzll(s);
 		if(t < 24){
 			if(f[s]) return f[s];
-			else return f[s] = calc(s ^ (1LL << t)) + calc(s  & ed[t]);
-		}else return calc(s ^ (1LL << t)) + calc(s & ed[t]);
+			else return f[s] = (calc(s ^ (1LL << t)) + calc(s  & ed[t])) % M;
+		}else return (calc(s ^ (1LL << t)) + calc(s & ed[t])) % M;
 	}
 
 	int sum(int n, vector<int> a, vector<int> b, vector<int> c) {
