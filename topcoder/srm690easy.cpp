@@ -20,8 +20,12 @@ public:
 		}else if(N % 5 != 0){
 			for(int i = 1; i <= K; i++) ans.pb(i * 5);
 		}else{
-			for(int i = 1; i <= K && i <= 14; i++) ans.pb(i * 7);
-			if(K == 15) ans.pb(1);
+			if(N != 60){
+				for(int i = 1; i <= K; i++) ans.pb(i * 4);
+			}else{
+				for(int i = 1; i <= K && i <= 14; ++i) ans.pb(i * 7);
+				if(K == 15) ans.pb(1);
+			}
 		}
 		return ans;
 	}
