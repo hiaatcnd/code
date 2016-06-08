@@ -16,7 +16,10 @@ public:
 		sort(all(g));
 		for(auto u : g)
 			for(auto v : g){
-				if(*lower_bound(all(g), f[u][v]) != f[u][v]){
+				bool flag = 0;
+				for(auto t : g)
+					if(f[u][v] == t) flag = 1;
+				if(!flag){
 					g.pb(f[u][v]);
 					return dfs(g);
 				}
