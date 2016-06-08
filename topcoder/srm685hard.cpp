@@ -91,7 +91,7 @@ public:
 			for(int j = i; j < 2000; ++j){
 				int v = (ll)val[i] * val[j] % M;
 				int w = (ll)r * inverse(v) % M;
-				if(Hash.count(w)) return build(vector<int>{4, i, j, Hash[w].fi, Hash[w].se});
+				if(Hash.count(w)) return build(vector<int>{i, j, Hash[w].fi, Hash[w].se});
 				if(!Hash.count(v)) Hash[v] = mkp(i, j);
 			}
 		assert(0);
