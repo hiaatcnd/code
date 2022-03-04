@@ -304,12 +304,6 @@ int calc_diff(string exp, string exp2) {
     }
   }
 
-  static int cnt = 0;
-  ++cnt;
-  if (cnt <= 10) {
-    cout << "calc diff: " << exp << " " << exp2 << ": " << ret << endl;
-  }
-
   return ret;
 }
 
@@ -345,7 +339,7 @@ string choose_one(vector<string> all_results, vector<string> selected_results, i
       choose_one = exp;
     }
   }
-  cout << "choose " << choose_one << ", max value: " << maxv << endl;
+  cout << "choose " << choose_one << endl;
   return choose_one;
 }
 
@@ -398,14 +392,14 @@ int main() {
   
   auto diff_results = all_different(results[max_operators]);
   cout << "different expressions with max operators: " << diff_results.size() << endl;
-  cout << "example: " << diff_results[diff_results.size() / 2] << endl;
+  // cout << "example: " << diff_results[diff_results.size() / 2] << endl;
 
   memset(check_num, -1, sizeof(check_num));
   int test_num = min(1000000/all_results.size(), diff_results.size());
   auto first = choose_one(all_results, diff_results, test_num);
 
   string first_ret;
-  cout << "first return value: " << endl;
+  cout << "first return value(i.e. 0010201, 2 represent correct place, 1 represent in another place): " << endl;
   cin >> first_ret;
   while (first_ret.size() != squares) {
     cout << "wrong format! first return value: " << endl;
@@ -413,7 +407,7 @@ int main() {
   }
   auto filtered_results = filter(all_results, first, first_ret);
   cout << "remaining expressions num: " << filtered_results.size() << endl;
-  cout << "example: " << filtered_results[filtered_results.size()/2] << endl;
+  // cout << "example: " << filtered_results[filtered_results.size()/2] << endl;
 
   while (true) {
     auto choose = choose_one(filtered_results, all_results, all_results.size());
@@ -426,11 +420,6 @@ int main() {
     }
     filtered_results = filter(filtered_results, choose, ret);
     cout << "remaining expressions num: " << filtered_results.size() << endl;
-    cout << "example: " << filtered_results[filtered_results.size()/2] << endl;
-    if (filtered_results.size() <= 5) {
-      for (auto exp : filtered_results) {
-        cout << exp << endl;
-      }
-    }
+    // cout << "example: " << filtered_results[filtered_results.size()/2] << endl;
   }
 }
