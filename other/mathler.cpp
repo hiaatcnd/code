@@ -125,9 +125,6 @@ vector<string> solve(int squares, int operators, int result, int level) {
 
   if (level == 1) {
     if (squares >= 5 && f[operators][squares - 2][result + B]) {
-      if (operators == 1 && squares == 5 && result == 2) {
-        printf("checked!\n");
-      }
       vector<string> low_level_results = solve(squares - 2, operators, result, 0);
       for (auto v : low_level_results) {
         results.push_back("(" + v + ")");
@@ -271,18 +268,6 @@ void pre_cal() {
     }
   }
 }
-/*
-int calc_score(string exp) {
-  static int num[16];
-  memset(num, 0, sizeof(num));
-  for (auto c : exp) {
-    num[place[c]]++;
-  }
-  for (int i = 0; i < 16; ++i) {
-    if (
-  }
-}
-*/
 
 int calc_diff(string exp, string exp2) {
   static int num[16];
@@ -310,7 +295,12 @@ int calc_diff(string exp, string exp2) {
 string choose_one(vector<string> all_results, vector<string> selected_results, int test_num) {
   if (all_results.size() == 1) {
     cout << "choose " << all_results[0] << endl;
+    exit(0);
     return all_results[0];
+  }
+  if (all_results.size() == 0) {
+    cout << "something wrong, no valid expression!" << endl;
+    exit(0);
   }
   if (selected_results.size() > test_num) {
     random_shuffle(selected_results.begin(), selected_results.end());
