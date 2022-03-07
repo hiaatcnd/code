@@ -147,6 +147,9 @@ vector<string> solve(int squares, int operators, int result, int level) {
           //printf("ok, s=%d, op=%d, equa=%d+%d\n", squares, operators, u, v);
           vector<string> rvalue = solve(r, rop, v, 1);
           vector<string> lvalue = solve(l, lop, u, 0);
+          if (squares == 7 && operators == 3 && lop == 1 && u == 48) {
+            cout << "check!" << endl;
+          }
           for (auto x : lvalue)
             for (auto y : rvalue) {
               results.push_back(x + "+" + y);
@@ -266,6 +269,10 @@ void pre_cal() {
         }
       }
     }
+    for (int s = 0; s <= squares; ++s) {
+      g[op][s] |= h[op][s];
+      f[op][s] |= g[op][s];
+    }
   }
 }
 
@@ -381,6 +388,9 @@ int main() {
   }
   
   auto diff_results = all_different(results[max_operators]);
+  if (diff_results.size() == 0) {
+    diff_results = all_different(results[max_operators - 1]);
+  }
   cout << "different expressions with max operators: " << diff_results.size() << endl;
   // cout << "example: " << diff_results[diff_results.size() / 2] << endl;
 
